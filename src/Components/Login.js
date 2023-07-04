@@ -27,7 +27,7 @@ const Login = () => {
     const password = "admin123";
 
     if (values.email === Email && values.password === password) {
-      window.location.href = "/home";
+      window.location.href = "/Task-management/home";
     } else {
       setShowAlert(true);
     }

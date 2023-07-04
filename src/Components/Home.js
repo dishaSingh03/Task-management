@@ -1,20 +1,26 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import "../CSS/Home.css";
+import Button from "react-bootstrap/Button";
+import HomeTable from "./HomeTable";
+import AddEmployee from "./AddEmployee";
+import { searchEmployeesByID } from "../Services/employeeService";
 
 const Home = () => {
-  const [isMenuOpen, setMenuOpen] = useState(true);
 
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
-
-  const logout = () => {
-    window.location.href = "/";
+  const [addEmployeeModel, setAddEmployeeModel] = useState(false);
+  const [employeeId, setEmployeeId] = useState("");
+  const handleSearch = () => {
+    searchEmployeesByID(employeeId, setEmployeeId);
+    console.log("employeeId", employeeId);
   };
 
   return (
     <>
+      <AddEmployee
+        employeeModelshow={addEmployeeModel}
+        setAddEmployeeModel={setAddEmployeeModel}
+      />
       <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
@@ -91,52 +97,42 @@ const Home = () => {
                 id="home-search"
                 class="form-control me-2"
                 type="search"
-                placeholder="Search"
+                placeholder="Search by ID"
                 aria-label="Search"
+                value={employeeId}
+                onChange={(event) => setEmployeeId(event.target.value)}
               />
-              <button class="btn btn-outline-success" type="submit">
+              <button
+                class="btn btn-outline-success"
+                className="btn btn-outline-success"
+                type="button"
+                onClick={handleSearch}
+              >
                 Search
               </button>
               &nbsp; &nbsp;
-              <button class="btn btn-success" type="submit" onClick={logout}>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  window.location.href = "/Task-management";
+                }}
+              >
                 LOGOUT
-              </button>
+              </Button>
             </form>
           </div>
         </div>
       </nav>
-
-      <div className="Home-table">
-        <table class="table table-dark table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td colspan="2">Larry the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <HomeTable/>
+      <Button
+        className="Add-employee-Btn"
+        variant="warning"
+        onClick={() => {
+          setAddEmployeeModel(true);
+        }}
+      >
+        Create Employee
+      </Button>
     </>
   );
 };
