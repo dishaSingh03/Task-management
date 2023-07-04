@@ -33,10 +33,6 @@ const Login = () => {
     }
   };
 
-  const handleAlertDismiss = () => {
-    setShowAlert(false);
-  };
-
   return (
     <>
       <Formik
@@ -104,13 +100,6 @@ const Login = () => {
               {showAlert && (
               <div className="alert alert-danger alert-dismissible" role="alert">
                 <strong>Danger!</strong> Wrong email or password!
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="alert"
-                  aria-label="Close"
-                  // onClick={handleAlertDismiss}
-                ></button>
               </div>
             )}
             </div>
