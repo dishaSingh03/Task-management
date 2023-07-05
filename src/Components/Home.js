@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import HomeTable from "./HomeTable";
 import AddEmployee from "./AddEmployee";
 import { searchEmployeesByID } from "../Services/employeeService";
+import logo from "../logo/Task MANAgment.png"
 
 const Home = () => {
 
@@ -23,8 +24,8 @@ const Home = () => {
       />
       <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">
-            TASK MANAGEMENT
+          <a class="navbar-brand" href="/Task-management/home">
+          <img src={logo} alt="Logo" style={{ width: "110px", height: "90%" }}/>
           </a>
           <button
             class="navbar-toggler"
@@ -45,8 +46,8 @@ const Home = () => {
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
-                  About
+                <a class="nav-link" href="#" onClick={(e)=>{setAddEmployeeModel(true)}}>
+                 Create Employee
                 </a>
               </li>
               <li class="nav-item dropdown">

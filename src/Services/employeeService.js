@@ -7,8 +7,8 @@ export const getEmployees = async (setEmployeeData, setTotalPage, page) => {
       method: "GET",
       url: `https://reqres.in/api/users?page=${page}`,
     });
-    console.log(response.data);
-    console.log("total", Math.ceil(response.data.total /response.data.per_page ));
+    // console.log(response.data);
+    // console.log("total", Math.ceil(response.data.total /response.data.per_page ));
     
     setEmployeeData(response.data);
     setTotalPage(Math.ceil(response.data.total /response.data.per_page ));
@@ -20,11 +20,11 @@ export const getEmployees = async (setEmployeeData, setTotalPage, page) => {
   }
 };
 
-export const searchEmployeesByID = async (id, setEmployeeId) => {
+export const searchEmployeesByID = async (employeeId, setEmployeeId) => {
   try {
     const response = await axios({
       method: "GET",
-      url: `https://reqres.in/api/users/${id}`,
+      url: `https://reqres.in/api/users/${employeeId}`,
     });
     console.log(response.data);
     
