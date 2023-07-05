@@ -1,10 +1,5 @@
 {
   "homepage": "https://dishasingh03.github.io/Task-management/",
-  "homepagePathOverrides": {
-    "/": "/",
-    "/home": "/Task-management/home",
-    "/table": "/Task-management/table"
-  },
   "name": "task-management",
   "version": "0.1.0",
   "private": true,
@@ -35,6 +30,8 @@
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "home": "gh-pages -d build --dest=home",
+    "table": "gh-pages -d build --dest=table",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
