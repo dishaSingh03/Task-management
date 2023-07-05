@@ -4,13 +4,13 @@ import "../CSS/Home.css";
 import Button from "react-bootstrap/Button";
 import { DataGrid } from "@mui/x-data-grid";
 import { getEmployees } from "../Services/employeeService";
-import Pagination from 'react-bootstrap/Pagination';
+import Pagination from "react-bootstrap/Pagination";
 
 const HomeTable = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const [apiCallInProgress, setApiCallInProgress] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
-  
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     let timerId;
@@ -26,6 +26,28 @@ const HomeTable = () => {
       clearTimeout(timerId);
     };
   }, []);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    // Perform API call with updated page parameter
+    getEmployees(setEmployeeData, setTotalPage, page);
+  };
+
+  const renderPagination = () => {
+    const items = [];
+    for (let i = 1; i <= totalPage; i++) {
+      items.push(
+        <Pagination.Item
+          key={i}
+          active={i === currentPage}
+          onClick={() => handlePageChange(i)}
+        >
+          {i}
+        </Pagination.Item>
+      );
+    }
+    return <Pagination>{items}</Pagination>;
+  };
 
   return (
     <>
@@ -58,10 +80,7 @@ const HomeTable = () => {
             )}
           </tbody>
         </table>
-
-        
-
-      
+        <div className="pagination">{renderPagination()}</div>
       </div>
     </>
   );

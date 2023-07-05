@@ -1,5 +1,10 @@
 {
-  "homepage": "http://dishaSingh03.github.io/Task-management/",
+  "homepage": "https://dishasingh03.github.io/Task-management/",
+  "homepagePathOverrides": {
+    "/": "/",
+    "/home": "/Task-management/home",
+    "/table": "/Task-management/table"
+  },
   "name": "task-management",
   "version": "0.1.0",
   "private": true,

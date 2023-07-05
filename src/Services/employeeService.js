@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-export const getEmployees = async (setEmployeeData, setTotalPage) => {
+export const getEmployees = async (setEmployeeData, setTotalPage, page) => {
   try {
     const response = await axios({
       method: "GET",
-      url: "https://reqres.in/api/users?page=1",
+      url: `https://reqres.in/api/users?page=${page}`,
     });
     console.log(response.data);
     console.log("total", Math.ceil(response.data.total /response.data.per_page ));
