@@ -1,16 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "../CSS/Home.css";
 import Button from "react-bootstrap/Button";
 import { DataGrid } from "@mui/x-data-grid";
 import { getEmployees } from "../Services/employeeService";
 import Pagination from "react-bootstrap/Pagination";
+import EmployeeContext from "../Store/employee-context";
+
 
 const HomeTable = () => {
   const [employeeData, setEmployeeData] = useState([]);
   const [apiCallInProgress, setApiCallInProgress] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const empCtx = useContext(EmployeeContext);
+  
+  console.log("emp", empCtx);
 
   useEffect(() => {
     let timerId;
@@ -63,7 +68,7 @@ const HomeTable = () => {
             </tr>
           </thead>
           <tbody>
-            {employeeData?.data && employeeData.data.length ? (
+            {/* {employeeData?.data && employeeData.data.length ? (
               employeeData.data?.map((row) => (
                 <tr key={row.id}>
                   <th scope="row">{row.id}</th>
@@ -76,6 +81,21 @@ const HomeTable = () => {
             ) : (
               <tr>
                 <td>No Records's Available</td>
+              </tr>
+            )} */}
+             {empCtx?.employeeData && empCtx.employeeData.length ? (
+              empCtx.employeeData?.map((row) => (
+                <tr key={row.id}>
+                  <th scope="row">{row.id}</th>
+                  <td>{row.first_name}</td>
+                  <td>{row.last_name}</td>
+                  <td>{row.email}</td>
+                  <td>{row.avatar}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colspan = "5" style={{ textAlign: "center" }}>No Records's Available</td>
               </tr>
             )}
           </tbody>

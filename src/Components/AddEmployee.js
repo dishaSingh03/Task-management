@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Formik } from "formik";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -8,12 +8,16 @@ import { Form, FormControl, Row } from "react-bootstrap";
 import * as Yup from "yup";
 import "../CSS/Home.css";
 import { getEmployees } from "../Services/employeeService";
+import EmployeeContext from "../Store/employee-context";
 
 const AddEmployee = ({ employeeModelshow, setAddEmployeeModel }) => {
   console.log("model call");
 
   const [employeeData, setEmployeeData] = useState([]);
   const [totalPage, setTotalPage] = useState(0);
+  const empCtx = useContext(EmployeeContext);
+  
+  console.log("emp", empCtx);
 
   const [addEmployeeValues, setAddEmployeeValuesValues] = useState({
     id: "",
@@ -56,7 +60,7 @@ const AddEmployee = ({ employeeModelshow, setAddEmployeeModel }) => {
         onSubmit={(values) => {
           // Alert the input values of the form that we filled
           console.log("values", values);
-         
+          empCtx.addEmployee(values);
         }}
       >
         {({

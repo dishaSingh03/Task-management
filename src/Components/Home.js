@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import "../CSS/Home.css";
 import Button from "react-bootstrap/Button";
 import HomeTable from "./HomeTable";
 import AddEmployee from "./AddEmployee";
 import { searchEmployeesByID } from "../Services/employeeService";
-import logo from "../logo/Task MANAgment.png"
+import logo from "../logo/Task MANAgment.png";
+
 
 const Home = () => {
 
   const [addEmployeeModel, setAddEmployeeModel] = useState(false);
   const [employeeId, setEmployeeId] = useState("");
+
+
+
   const handleSearch = () => {
     searchEmployeesByID(employeeId, setEmployeeId);
     console.log("employeeId", employeeId);
